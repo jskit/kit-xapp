@@ -16,9 +16,11 @@ if (typeof my !== 'undefined') {
   Object.assign(origin.me, my, { miniType: 'aliapp' });
   // my = {};
 }
+
+/*
 if (typeof App !== 'undefined') {
   origin.App = App;
-  // App = noop;
+  // App = noop; is read-only
 }
 if (typeof Page !== 'undefined') {
   origin.Page = Page;
@@ -28,9 +30,8 @@ if (typeof getCurrentPages !== 'undefined') {
   origin.getCurrentPages = getCurrentPages;
   // getCurrentPages = noop; is read-only
 }
+*/
 
 const mini = Object.assign({}, origin);
-
-
 
 export default mini;

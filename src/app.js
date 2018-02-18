@@ -7,6 +7,8 @@ import api from './config/api';
 import utils from './utils';
 
 // 覆写小程序内部方法(启动时就调用执行)
+console.log(rewrite)
+console.log(11111)
 rewrite();
 
 const defalutGlobalData = {
@@ -20,7 +22,7 @@ const defalutGlobalData = {
 };
 let globalData = { ...defalutGlobalData };
 // 初始化
-my.getStorage({
+me.getStorage({
   key: 'globalData',
   success(res) {
     Object.assign(globalData, res.data);
@@ -30,14 +32,16 @@ my.getStorage({
 App({
   // api,
   onLaunch() {
-    my.getSystemInfo({
+    console.log('App');
+    console.log(this);
+    me.getSystemInfo({
       success: (res) => {
         this.updateData({
           systemInfo: res,
         });
       },
     });
-    my.getLocation({
+    me.getLocation({
       cacheTimeout: 300,
       success: (res) => {
         this.updateData({
@@ -52,24 +56,24 @@ App({
         this.updateData({
           location: '',
         });
-        my.alert({
+        me.alert({
           title: `${err.error}: ${err.errorMessage}`,
         });
       },
     });
     // 保持屏幕常亮
-    // my.setKeepScreenOn({
+    // me.setKeepScreenOn({
     //   keepScreenOn: true,
     // });
   },
   onShow() {
     console.log('App Show');
-    // my.showToast('demo testing');
-    my.getNetworkType({
+    // me.showToast('demo testing');
+    me.getNetworkType({
       success: (res) => {
         console.log(res);
         if (!res.networkAvailable) {
-          my.showToast('网络不可用，请稍后重试...');
+          me.showToast('网络不可用，请稍后重试...');
         }
         this.updateData({
           netInfo: res,
@@ -88,18 +92,18 @@ App({
     const { userInfo = {} } = this.getData();
     if (userInfo.token && userInfo.user_id) {
       // console.log('用户已登录');
-      // my.showToast('您已登录');
+      // me.showToast('您已登录');
       return true;
     }
     // this.goLogin();
   },
   goLogin() {
-    my.goPage('login');
+    me.goPage('login');
   },
   updateData(options = {}, reset) {
     if (reset) {
       globalData = { ...defalutGlobalData };
-      my.removeStorage({
+      me.removeStorage({
         key: 'globalData',
         success() {
           console.log('reset 数据成功');
@@ -107,7 +111,7 @@ App({
       });
     } else {
       Object.assign(globalData, options);
-      my.setStorage({
+      me.setStorage({
         key: 'globalData',
         data: globalData,
         success() {
