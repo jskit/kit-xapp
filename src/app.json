@@ -1,15 +1,16 @@
 {
   "debug": true,
-  "version": "2.8.0",
+  "version": "0.0.1",
   "pages": [
+    "pages/index/index",
     "demo/test/test",
-    "pages/index/index"
+    "pages/profile/profile"
   ],
   "window": {
     "enableWK": "YES",
     "enableDSL": true,
     "pullRefresh": false,
-    "defaultTitle": "特惠食品",
+    "defaultTitle": "小程序",
     "backgroundColor": "#F5F5F9",
     "allowsBounceVertical": true
   },
@@ -19,7 +20,7 @@
     "backgroundColor": "#ffffff",
     "items": [
       {
-        "pagePath": "pages/zt2/zt2",
+        "pagePath": "pages/index/index",
         "name": "首页",
         "icon": "img/profile/ic_aliportal.png",
         "activeIcon": "img/profile/ic_aliportal_s.png"
