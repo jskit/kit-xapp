@@ -1,17 +1,11 @@
 
 import {
   me,
-  MiniApp,
-  MiniPage,
-  rewrite,
-} from './mini';
+  // xApp,
+} from './mini/origin';
 import api from './config/api';
-import utils from './utils';
 
 // 覆写小程序内部方法(启动时就调用执行)
-console.log(rewrite)
-console.log(11111)
-rewrite();
 
 const defalutGlobalData = {
   addressInfo: {},
@@ -31,6 +25,7 @@ me.getStorage({
   },
 });
 
+// 不能使用 xApp，会报错
 App({
   // api,
   onLaunch() {

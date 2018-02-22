@@ -1,8 +1,6 @@
 // 针对小程序挂载的方法进行覆写优化，调用更加简单
 
-import {
-  me,
-} from '../origin';
+import { me } from '../origin';
 // import { methodRewrite } from './utils';
 
 function methodRewrite(func, opts, funcName) {
@@ -39,7 +37,7 @@ function rewrite() {
 
   if (!me.alert) {
     // 微信无 alert 方法
-    me.alert = function(msg) {
+    me.alert = (msg) => {
       me.showToast(msg);
     }
   }

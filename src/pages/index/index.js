@@ -1,10 +1,9 @@
 import {
   me,
-  MiniApp,
-  MiniPage,
+  xPage,
 } from '../../mini';
 
-MiniPage({
+xPage({
   /**
    * 页面的初始数据
    */
@@ -19,13 +18,14 @@ MiniPage({
   onLoad(query) {
     console.log('Page');
     console.log(this);
+    me.showLoading();
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady() {
-
+    me.hideLoading();
   },
 
   /**
@@ -68,6 +68,6 @@ MiniPage({
    */
   onShareAppMessage() {
 
-  }
+  },
 
 });

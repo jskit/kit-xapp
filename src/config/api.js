@@ -108,21 +108,21 @@ const modelApis = {
 const commonParams = {
   token: '',
   uid: '',
-  zoneId: '857',  // 当前收货省份
-  uuid: '',       // 用户唯一标志
-  udid: '',       // 设备唯一标志
-  timestamp: '',  // 时间
+  zoneId: '857',    // 当前收货省份
+  uuid: '',         // 用户唯一标志
+  udid: '',         // 设备唯一标志
+  timestamp: '',    // 时间
   channel: 'wxapp', // 渠道
-  // cpsName: '',    // 废弃
+  // cpsName: '',   // 废弃
   spm: 'wxapp',
-  v: version,  // 系统版本，用于获取最新版数据
-  terminal: 'wxapp',// 系统版本，用于获取最新版数据
-  device: '',     // 设备
-  swidth: '',     // 屏幕宽度
-  sheight: '',    // 屏幕高度
+  v: version,         // 系统版本，用于获取最新版数据
+  terminal: 'wxapp',  // 系统版本，用于获取最新版数据
+  device: '',         // 设备
+  swidth: '',         // 屏幕宽度
+  sheight: '',        // 屏幕高度
   /* eslint appx/no-appx-globals: 0 */
-  location: '',   // 地理位置
-  net: '',        // 网络
+  location: '',       // 地理位置
+  net: '',            // 网络
   appid: 'wxa090d3923fde0d4b',
 };
 
@@ -166,7 +166,4 @@ function getCommonParams() {
 models.getCommonParams = getCommonParams;
 models.setCommonParams = setCommonParams;
 
-// console.log(models)
-
-module.exports = models;
-exports = module.exports;
+export default models;

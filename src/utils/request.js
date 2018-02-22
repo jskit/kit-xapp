@@ -1,7 +1,5 @@
 // import Promise from 'bluebird'
-import {
-  me,
-} from '../mini';
+import { me } from '../mini';
 import { stringify } from './stringUtil';
 
 function noop() {
@@ -69,7 +67,7 @@ const defaultOptions = {
 //   }
 // }
 
-function request(url, options = {}, success = noop, fail = noop) {
+export default function request(url, options = {}, success = noop, fail = noop) {
   const newOptions = Object.assign({ }, defaultOptions, options);
   const method = (newOptions.method || 'GET').toUpperCase();
   newOptions.method = method;
@@ -219,6 +217,3 @@ function request(url, options = {}, success = noop, fail = noop) {
   // //   console.log('onFulfilled:', err);
   // // })
 }
-
-module.exports = request;
-exports = module.exports;

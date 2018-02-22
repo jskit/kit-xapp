@@ -1,13 +1,8 @@
-// 混入 Mixins
+// 扩展 Page
 
-
-import {
-  me,
-} from '../mini';
+import { me } from '../mini';
 import pages from '../pages';
-import {
-  stringify
-} from '../../utils/stringUtil';
+import { stringify } from '../utils';
 
 const messages = {};
 let msgPages = {};
@@ -15,7 +10,7 @@ let msgPages = {};
 // mixin 方法，提供混入
 // 绑定事件或触发类事件 全用 on 开头
 // 自调用事件，不用 on 开头
-const mixins = {
+export default {
   // onLog() {
   //   // 日志方法
   //   console.log('log');
@@ -66,13 +61,13 @@ const mixins = {
       const {
         pageName,
         pageId,
-        route
+        // route,
       } = pageItem;
       // 弱实现，消息标识只记录同类的第一个页面
       if (!msgPages[pageName]) {
         const msgKey = `${pageName}:${pageId}`;
         msgPages[pageName] = msgKey;
-        const message = messages[msgKey];
+        // const message = messages[msgKey];
         // if (message && message.needRefresh) {
         //   pageItem.refresh();
         //   delete messages[msgKey];
@@ -119,22 +114,16 @@ const mixins = {
   getPageName() {
     const {
       pageName,
-      route = ''
+      route = '',
     } = this;
     return pageName || route.split('/').reverse()[0] || pages.defaultPage;
   },
 
   getShareInfo() {
     const {
-      shareInfo
-    } = this.data;
-    const {
-      pageQuery = {}
-    } = this;
-    const {
-      pagePath
+      pagePath,
     } = me.getCurPageUrl(this.getPageName(), this.pageQuery);
-    return Object.assign({
+    return {
       title: '好食期',
       desc: '专注食品特卖平台，品牌食品2折起~',
       // imageUrl: 'https://static.doweidu.com/static/hsq/images/logo_fdfe8f30f2.png', // 默认可以设置 logo
@@ -145,14 +134,15 @@ const mixins = {
       fail() {
         // me.showToast('分享失败');
       },
-    }, shareInfo);
+      ...this.data.shareInfo,
+    };
   },
 
   // 绑定跳转
   onUrlPage(e) {
     const {
       url,
-      index
+      index,
     } = e.currentTarget.dataset;
     console.log(`${(url || '无需跳转')}, ${index}`);
     me.goPage(url);
@@ -203,7 +193,7 @@ const mixins = {
     const msgKey = msgPages[page];
     if (!messages[msgKey]) messages[msgKey] = {};
     Object.assign(messages[msgKey], opts);
-    const msg = messages[msgKey];
+    // const msg = messages[msgKey];
     return messages[msgKey];
   },
 
@@ -226,5 +216,3 @@ const mixins = {
     return message || {};
   },
 };
-
-export default mixins;

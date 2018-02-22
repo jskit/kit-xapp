@@ -1,12 +1,18 @@
 import {
   me,
-  MiniApp,
-  MiniPage,
+  xPage,
 } from '../../mini';
 
-MiniPage({
+xPage({
   data: {},
   onLoad() {
+    me.showLoading();
+  },
 
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady() {
+    me.hideLoading();
   },
 });

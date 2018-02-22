@@ -1,4 +1,6 @@
-const pullList = {
+// 扩展滚动加载列表
+
+export default {
   // 滚动记载常用配置
   pullParamsDefault: {
     pageNum: 1,
@@ -106,5 +108,3 @@ const pullList = {
     // });
   },
 };
-
-export default pullList;

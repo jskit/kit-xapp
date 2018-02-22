@@ -1,28 +1,19 @@
-
-
-import {
-  me,
-  // App,
-  // Page,
-  // getCurrentPages,
-} from '../origin';
+// 扩展 me
 import regPages, { tabPages } from '../pages';
-import extend from '../utils/extend';
-import { stringify } from '../../utils/stringUtil';
+import { stringify } from '../utils';
 
-function extendMe() {
-  console.log('执行 extendMe 扩展');
+// rewrite.me();
 
-  me.getCurPageUrl = (url, params = {}) => {
+export default {
+  getCurPageUrl(url, params = {}) {
     let query = { ...params };
-    let urlArr = url.split('?');
-    let pageName = urlArr[0];
+    const urlArr = url.split('?');
+    const pageName = urlArr[0];
     if (!pageName) return;
-    let pagePath = regPages[pageName];
-    query = !urlArr[1] ? stringify(query) :
-         [stringify(query), urlArr[1]].join('&');
+    const pagePath = regPages[pageName];
+    query = !urlArr[1] ? stringify(query) : [stringify(query), urlArr[1]].join('&');
     if (!pagePath) {
-      me.showToast('此链接不支持跳转');
+      this.showToast('此链接不支持跳转');
       return {};
       // 要处理外部 url 数据
       // const { hash, search } = new URL(url);
@@ -40,7 +31,8 @@ function extendMe() {
       query,
       pagePath: `${pagePath}${query}`,
     };
-  };
+  },
+
   /**
    * 扩展页面跳转方法，支持内部跳转以及H5 url 映射到小程序内部跳转
    *
@@ -48,14 +40,14 @@ function extendMe() {
    * @param {any} [query={}]
    * @returns
    */
-  me.goPage = (url, query = {}) => {
+  goPage(url, query = {}) {
     if (!url) return;
     const { replace, back } = query;
     let type = replace ? 'replace' : (back ? 'back' : '');
     /* eslint no-param-reassign: 0 */
     delete query.replace;
     delete query.back;
-    const { pageName, pagePath } = me.getCurPageUrl(url, query);
+    const { pageName, pagePath } = this.getCurPageUrl(url, query);
     if (!pagePath) return;
     const page = { url: `../../${pagePath}` };
     if (tabPages[pageName]) {
@@ -63,38 +55,37 @@ function extendMe() {
     }
     switch (type) {
       case 'replace':
-        me.redirectTo(page);
+        this.redirectTo(page);
         break;
       case 'back':
-        me.navigateBack(page);
+        this.navigateBack(page);
         break;
       case 'switch':
-        me.switchTab(page);
+        this.switchTab(page);
         break;
       default:
         /* eslint no-undef: 0 */
         if (getCurrentPages().length >= 10) {
-          me.redirectTo(page);
+          this.redirectTo(page);
         } else {
           // navigateTo, redirectTo 只能打开非 tabBar 页面。
           // switchTab 只能打开 tabBar 页面。
-          me.navigateTo(page);
+          this.navigateTo(page);
         }
         break;
     }
-  };
-  me.showErrPage = (message = '', replace = true) => {
-    me.goPage('error', {
+  },
+
+  /**
+   * showErrPage
+   *
+   * @param {string} [message='']
+   * @param {boolean} [replace=true]
+   */
+  showErrPage(message = '', replace = true) {
+    this.goPage('error', {
       message,
       replace,
     });
-  };
-}
-
-export default extendMe;
-
-// export function delayPromise(ms) {
-//   return new Promise((resolve) => {
-//     setTimeout(resolve, ms);
-//   });
-// }
+  },
+};

@@ -40,5 +40,4 @@ const mini = createEnv({
   env: apiEnv,
 });
 
-module.exports = mini;
-exports = module.exports;
+export default mini;
