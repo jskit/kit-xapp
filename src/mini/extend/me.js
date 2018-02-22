@@ -11,6 +11,8 @@ import extend from '../utils/extend';
 import { stringify } from '../../utils/stringUtil';
 
 function extendMe() {
+  console.log('执行 extendMe 扩展');
+
   me.getCurPageUrl = (url, params = {}) => {
     let query = { ...params };
     let urlArr = url.split('?');

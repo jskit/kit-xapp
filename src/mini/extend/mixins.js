@@ -1,6 +1,9 @@
 // 混入 Mixins
 
 
+import {
+  me,
+} from '../mini';
 import pages from '../pages';
 import {
   stringify
@@ -41,18 +44,18 @@ const mixins = {
     } else {
       delete this.onShareAppMessage;
     }
-    // wx.on('')
-    // wx.onUserCaptureScreen(() => {
-    //   wx.showToast('收到用户截屏事件');
+    // me.on('')
+    // me.onUserCaptureScreen(() => {
+    //   me.showToast('收到用户截屏事件');
     // });
     // {
     //   isConnected: false,
     //   networkType: none, // wiki 4g
     // }
-    // wx.onNetworkStatusChange((res) => {
+    // me.onNetworkStatusChange((res) => {
     //   console.log(res);
     //   if (res.isConnected) {
-    //     wx.showToast('呀，网络丢了~~');
+    //     me.showToast('呀，网络丢了~~');
     //   }
     // });
 
@@ -79,7 +82,7 @@ const mixins = {
     console.log(msgPages);
 
     // console.log($global);
-    // wx.alert({
+    // me.alert({
     //   title: `${$global.appImpl.$launchTime}`,
     // });
     // api.getProfile({}, (res) => {
@@ -91,7 +94,7 @@ const mixins = {
   },
 
   setHeaderTitle(title) {
-    wx.setNavigationBarTitle({
+    me.setNavigationBarTitle({
       title,
     });
   },
@@ -130,17 +133,17 @@ const mixins = {
     } = this;
     const {
       pagePath
-    } = wx.getCurPageUrl(this.getPageName(), this.pageQuery);
+    } = me.getCurPageUrl(this.getPageName(), this.pageQuery);
     return Object.assign({
       title: '好食期',
       desc: '专注食品特卖平台，品牌食品2折起~',
       // imageUrl: 'https://static.doweidu.com/static/hsq/images/logo_fdfe8f30f2.png', // 默认可以设置 logo
       path: pagePath,
       success() {
-        // wx.showToast('分享成功');
+        // me.showToast('分享成功');
       },
       fail() {
-        // wx.showToast('分享失败');
+        // me.showToast('分享失败');
       },
     }, shareInfo);
   },
@@ -152,7 +155,7 @@ const mixins = {
       index
     } = e.currentTarget.dataset;
     console.log(`${(url || '无需跳转')}, ${index}`);
-    wx.goPage(url);
+    me.goPage(url);
   },
 
   // 页面跳转
@@ -170,7 +173,7 @@ const mixins = {
         needRefresh: true,
       });
     }
-    wx.goPage(page, query);
+    me.goPage(page, query);
   },
 
   back(step, query = {}) {
@@ -184,7 +187,7 @@ const mixins = {
         url: `${step}?${stringify(query)}`,
       };
     }
-    wx.navigateBack(opts);
+    me.navigateBack(opts);
   },
 
   refresh() {
@@ -212,10 +215,10 @@ const mixins = {
       message = messages[msgKey] || {};
       delete messages[msgKey];
       if (message.needRefresh) {
-        // wx.showToast('触发刷新');
+        // me.showToast('触发刷新');
         this.refresh();
         delete messages[msgKey];
-        // wx.trigger({
+        // me.trigger({
         //   hsq: 'refresh',
         // });
       }

@@ -1,6 +1,8 @@
 
 import {
   me,
+  MiniApp,
+  MiniPage,
   rewrite,
 } from './mini';
 import api from './config/api';

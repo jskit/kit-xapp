@@ -1,8 +1,10 @@
 import {
   me,
+  MiniApp,
+  MiniPage,
 } from '../../mini';
 
-Page({
+MiniPage({
   /**
    * 页面的初始数据
    */
