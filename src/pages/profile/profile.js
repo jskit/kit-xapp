@@ -1,7 +1,7 @@
 import {
   me,
   xPage,
-} from '../../mini';
+} from '../../utils/mini';
 
 xPage({
   data: {},

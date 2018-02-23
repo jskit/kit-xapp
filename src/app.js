@@ -2,8 +2,11 @@
 import {
   me,
   // xApp,
-} from './mini/origin';
+} from './utils/mini';
 import api from './config/api';
+
+console.log(me)
+// console.log(getCurrentPages())
 
 // 覆写小程序内部方法(启动时就调用执行)
 

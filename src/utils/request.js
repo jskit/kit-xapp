@@ -1,5 +1,5 @@
 // import Promise from 'bluebird'
-import { me } from '../mini';
+import { me } from './mini';
 import { stringify } from './stringUtil';
 
 function noop() {
@@ -56,7 +56,7 @@ const defaultOptions = {
 //     throw res.data
 //   }
 //   if (errCode[status]) {
-//     wx.showToast(`${status}: ${ errCode[status]}`)
+//     me.showToast(`${status}: ${ errCode[status]}`)
 //   }
 //   const error = new Error(status)
 //   error.res = res
@@ -88,22 +88,22 @@ export default function request(url, options = {}, success = noop, fail = noop) 
   newOptions.header = newOptions.headers;
 
   const resolve = (data) => {
-    wx.hideLoading();
+    me.hideLoading();
     if (typeof success === 'function') {
       success(data);
     }
   };
   const reject = (err = {}) => {
-    wx.hideLoading();
+    me.hideLoading();
     if (typeof fail === 'function' && fail(err)) {
       return;
     }
     const { errmsg = '网络异常，请稍后重试', errno = 'err' } = err;
     if (errno === 510010) {
-      wx.goPage('login');
+      me.goPage('login');
     } else {
       const message = `${errno}: ${errmsg}`;
-      wx.showToast(message);
+      me.showToast(message);
       console.log('errmsg:', message);
     }
   };
@@ -136,7 +136,7 @@ export default function request(url, options = {}, success = noop, fail = noop) 
       //   error: 12,
       //   errorMessage: '',
       // }
-      // wx.alert({
+      // me.alert({
       //   title: 'err: ' + JSON.stringify(err),
       // });
       reject({
@@ -155,7 +155,7 @@ export default function request(url, options = {}, success = noop, fail = noop) 
   // 改为回调形式来使用，以支持此能力（Promise 无法实现 finally 最后调用）
   // return new Promise((resolve, reject) => {
   //   // 一个被 reject 的 promise, 后续的 then queue 都不会执行。。。
-  //   wx.httpRequest(Object.assign({}, newOptions, {
+  //   me.httpRequest(Object.assign({}, newOptions, {
   //     url: url, // 目标服务器 url
   //     success: (res = {}) => {
   //       console.info(`请求 ${url} ${res.status}`);
@@ -180,7 +180,7 @@ export default function request(url, options = {}, success = noop, fail = noop) 
   //       reject(err);
   //     },
   //     complete: () => {
-  //       wx.hideLoading();
+  //       me.hideLoading();
   //     },
   //   }));
   // })
@@ -190,9 +190,9 @@ export default function request(url, options = {}, success = noop, fail = noop) 
   // //   console.log('onFulfilled:', err);
   // //   const { errmsg = '接口错误', errno } = err;
   // //   if (errno === 510010) {
-  // //     wx.goPage("login");
+  // //     me.goPage("login");
   // //   } else {
-  // //     wx.showToast(`${errno}: ${errmsg}`);
+  // //     me.showToast(`${errno}: ${errmsg}`);
   // //   }
   // //   const error = new Error(errno);
   // //   error.message = errmsg;
@@ -201,9 +201,9 @@ export default function request(url, options = {}, success = noop, fail = noop) 
   // .catch((err = {}) => {
   //   const { errmsg = '网络异常，请稍后重试', errno } = err;
   //   if (errno === 510010) {
-  //     wx.goPage("login");
+  //     me.goPage("login");
   //   } else {
-  //     wx.showToast(`${errno}: ${errmsg}`);
+  //     me.showToast(`${errno}: ${errmsg}`);
   //   }
   //   const error = new Error() || {};
   //   throw {

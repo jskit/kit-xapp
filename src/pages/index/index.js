@@ -1,7 +1,7 @@
 import {
   me,
   xPage,
-} from '../../mini';
+} from '../../utils/mini';
 
 xPage({
   /**
@@ -19,6 +19,7 @@ xPage({
     console.log('Page');
     console.log(this);
     me.showLoading();
+    console.log(getCurrentPages())
   },
 
   /**

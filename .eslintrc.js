@@ -1,6 +1,5 @@
 // http://eslint.org/docs/user-guide/configuring
 
-// export default {
 module.exports = {
   "root": true,
   "parser": "babel-eslint",
